@@ -96,6 +96,32 @@ function add_user($login, $pass){
     return true;
 }
 
+//Валидация логин
+function validation_login($user){
+    if (preg_match('#^[a-zA-Z]{2,4}[\w_\-\.@]{0,10}$#', $user) == 1) {
+        return true;
+    }else{
+        message("Вы ввели неверное имя пользователя, пожалуйста, попробуйте еще раз");
+        header("Location: register.php");
+        return false;
+        die;
+    }
+
+}
+
+//Валидация пароль
+function validation_pass($pass){
+    if (preg_match('#^[\w_\-\.@!\$%\?@]{6,10}$#', $pass) === 1) {
+        return true;
+    }else{
+        message("Вы ввели неккоректный пароль. Пароль должен содержать не менее 6 символов и может содержать буквы английского алфавита, цифры и символы _-.@!$%?@");
+        header("Location: register.php");
+        return false;
+        die;
+    }
+
+}
+
 function register_user($auth_data){
     if(empty($auth_data) || !isset($auth_data['login']) || empty($auth_data['login']) || !isset($auth_data['pass']) || !isset($auth_data['pass2']) ){
         return false;
@@ -114,6 +140,10 @@ function register_user($auth_data){
         header("Location: register.php");
         die;
     };
+
+    if (validation_login($auth_data['login']) !== true || validation_pass($auth_data['pass']) !== true){
+        return false;
+    }
 
     if(add_user($auth_data['login'], $auth_data['pass']) === true){
         message("Пользователь с именем " . $auth_data['login'] . " успешно зарегестрирован", true);

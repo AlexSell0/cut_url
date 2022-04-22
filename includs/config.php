@@ -12,3 +12,8 @@ define("DB_PASS", "root");
 define("URL_CHARS", "abcdefghijklmnopqrstuvwxyz-0123456789");
 
 session_start();
+
+// define("DB_HOST", "https://alexsell0.github.io/cut_url/");
+// define("DB_NAME", "alex_sell_testbd");
+// define("DB_USER", "alexsell");
+// define("DB_PASS", "j.mCaKkvm56KUCu");
